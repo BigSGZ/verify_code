@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户登录</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.2/jquery.js"></script>
+	<script type="text/javascript">
+	$(function(){
+	   $('img').click(function(){
+	   console.log("刷新验证码");
+	   $(this).attr('src','{% url 'app:get_verif_code' %}'+Math.random());
+	})
+	})
+	</script>
+</head>
+<body>
+<form action="{% url 'app:user_login' %}" method="post">
+	{% csrf_token %}
+	<span>用户名：</span><input type="text"name="username" placeholder="请输入用户名">
+	<br>
+	<span>验证码：</span><input type="text" name="verifycode" placeholder="请填充验证码">
+	<img src="{% url 'app:get_verif_code' %}" alt="验证码">
+	<br>
+	<input type="submit">
+</form>
+</body>
+</html>
